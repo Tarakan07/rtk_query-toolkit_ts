@@ -3,7 +3,12 @@
     {
       "title": "created post",
       "body": "lalalla",
-      "id": 1
+      "id": 5
+    },
+    {
+      "title": "created post",
+      "body": "lalalla",
+      "id": 6
     }
   ],
   "comments": [],

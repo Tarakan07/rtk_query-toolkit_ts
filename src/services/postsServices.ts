@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
+import { userAction } from "../redux/slices/UserSlice";
 export type TPosts = {
 	id: number;
 	title: string;
@@ -29,6 +29,9 @@ export const postApi = createApi({
 				method: "POST",
 				body: post,
 			}),
+			async onQueryStarted(id, { dispatch, queryFulfilled }) {
+				dispatch(userAction().clear_cart());
+			},
 			invalidatesTags: ["Post"],
 		}),
 		deletePost: build.mutation<TPosts, number>({

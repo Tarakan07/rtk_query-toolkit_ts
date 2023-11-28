@@ -1,15 +1,16 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchUsers } from "../fetches/fetchUser";
+import { TPosts } from "../../services/postsServices";
 export type TUser = {
 	id: number;
 	name: string;
 	email: string;
 };
-
+export type TCart = TPosts;
 type TUserState = {
 	user: TUser[];
 	count?: number;
-
+	cart: TCart[];
 	loading: boolean;
 	error: string;
 };
@@ -17,6 +18,7 @@ type TUserState = {
 const initialState: TUserState = {
 	user: [],
 	count: 0,
+	cart: [],
 	loading: false,
 	error: "",
 };
@@ -26,7 +28,14 @@ const userSlice = createSlice({
 	initialState,
 	reducers: {
 		increment: (state, action: PayloadAction<number>) => {
-			state.count = state.count != undefined ? state.count + action.payload : 0;
+			state.count =
+				state.count !== undefined ? state.count + action.payload : 0;
+		},
+		add_to_cart: (state, action: PayloadAction<TCart>) => {
+			state.cart.push(action.payload);
+		},
+		clear_cart: (state) => {
+			state.cart = [];
 		},
 	},
 	extraReducers: (builder) => {
